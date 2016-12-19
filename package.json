@@ -1,12 +1,13 @@
 {
   "name": "node-js-getting-started",
   "version": "0.1.0",
-  "description": "Violette messenger bot",
+  "description": "Tayri bot",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
+    "@segment/to-iso-string": "^1.0.1",
     "cors": "^2.5.3",
     "express": "~4.9.x",
     "node-weatherunderground": "^1.2.0",
@@ -24,5 +25,5 @@
     "heroku",
     "express"
   ],
-  "license": "Ultra Inc."
+  "license": "UNLICENSED"
 }
