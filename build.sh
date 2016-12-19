@@ -1,5 +1,5 @@
 #!/bin/bash
 git add .
-git commit -m 'updated the bot to speak'
-heroku git:remote -a violet-messenger-bot
+git commit -m 'new update'
+heroku git:remote -a tayri
 git push heroku master
