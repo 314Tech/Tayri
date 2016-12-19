@@ -9,48 +9,48 @@ RESTful application example on Heroku
 
 1) show all stories
 
-https://pacific-cliffs-7948.herokuapp.com/v1/stories
+https://pacific-cliffs-7948.herokuapp.com/v1stories
 
 2) show number of stories
 
-https://pacific-cliffs-7948.herokuapp.com/v1/stories/count
+https://pacific-cliffs-7948.herokuapp.com/v1stories/count
 
 
 #### For story methods:
 
 1) show all text in specific story
 
-https://pacific-cliffs-7948.herokuapp.com/v1/story/{id}/text/all
+https://pacific-cliffs-7948.herokuapp.com/v1story/{id}/text/all
 
 2) show number of text in specific story
 
-https://pacific-cliffs-7948.herokuapp.com/v1/story/{id}/text/count
+https://pacific-cliffs-7948.herokuapp.com/v1story/{id}/text/count
 
 3) show individual text in specific story
 
-https://pacific-cliffs-7948.herokuapp.com/v1/story/{id}/text/{num}
+https://pacific-cliffs-7948.herokuapp.com/v1story/{id}/text/{num}
 
 4) show all image in specific story
 
-https://pacific-cliffs-7948.herokuapp.com/v1/story/{id}/image/all
+https://pacific-cliffs-7948.herokuapp.com/v1story/{id}/image/all
 
 5) show number of image in specific story
 
-https://pacific-cliffs-7948.herokuapp.com/v1/story/{id}/image/count
+https://pacific-cliffs-7948.herokuapp.com/v1story/{id}/image/count
 
 6) show individual image in specific story
 
-https://pacific-cliffs-7948.herokuapp.com/v1/story/{id}/image/{num}
+https://pacific-cliffs-7948.herokuapp.com/v1story/{id}/image/{num}
 
 7) show all multimedia in specific story
 
-https://pacific-cliffs-7948.herokuapp.com/v1/story/{id}/multimedia/all
+https://pacific-cliffs-7948.herokuapp.com/v1story/{id}/multimedia/all
 
 8) show number of multimedia in specific story
 
-https://pacific-cliffs-7948.herokuapp.com/v1/story/{id}/multimedia/count
+https://pacific-cliffs-7948.herokuapp.com/v1story/{id}/multimedia/count
 
 9) show individual multimedia in specific story
 
-https://pacific-cliffs-7948.herokuapp.com/v1/story/{id}/multimedia/{num}
+https://pacific-cliffs-7948.herokuapp.com/v1story/{id}/multimedia/{num}
 

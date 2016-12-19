@@ -1,10 +1,11 @@
-  //
+//
 //  Index.js
 //  Violet
 //
-//  Created by Nabyl Bennouri on 10/03/16.
-//  Copyright © 2015 Ultra Inc. All rights reserved.
+//  Created by Nabyl Bennouri on 12/09/16.
+//  Copyright © 2016 Three Fourteen Technology. All rights reserved.
 
+require('./app/index')
 
 var express = require('express')
 var cors = require('cors');
@@ -43,7 +44,7 @@ app.listen(app.get('port'), function() {
 
 
  // weather
- app.get('/v1/weather/condition', function(request, response) {
+ app.get('/v1/condition', function(request, response) {
    var query = URL.parse(request.url).query;
       console.log('query pre: ' +  query);
 
@@ -137,17 +138,36 @@ app.listen(app.get('port'), function() {
  });
 
  // weather
- app.get('/v1/weather/test', function(request, response) {
+ app.get('/v1/sms', function(request, response) {
    var query = URL.parse(request.url).query;
       console.log('query pre: ' +  query);
 
 
-      response.send([
-        {"Tayri":  "App Alive!"}
-      ]);
+      rapid.call('Twilio', 'sendSms', {
+      	'accountSid': 'AC4a9196734473d618827ac2be6ca1df7d',
+      	'accountToken': '0ced54dca58c297b22788b3ccca818c4',
+      	'from': '9712452567',
+      	'to': '9715700040',
+      	'applicationSid': '',
+      	'statusCallback': '',
+      	'body': query,
+      	'messagingServiceSid': '',
+      	'maxPrice': '',
+      	'provideFeedback': ''
+
+      }).on('success', (payload)=>{
+        response.send([
+          {"Tayri":  "SMS Sent successfully"
+        ]);
+      }).on('error', (payload)=>{
+        response.send([
+          {"Tayri":  "SMS Failed!"}
+        ]);
+      });
+
  });
 
- app.get('/v1/weather/forecast', function(request, response) {
+ app.get('/v1/forecast', function(request, response) {
    var query = URL.parse(request.url).query;
    console.log('query pre: ' +  query);
 
@@ -260,7 +280,7 @@ app.listen(app.get('port'), function() {
 
 
  // uv
- app.get('/v1/weather/uv', function(request, response) {
+ app.get('/v1/uv', function(request, response) {
    var query = URL.parse(request.url).query;
    var querySplit = query.split(",");
 
@@ -279,15 +299,15 @@ app.listen(app.get('port'), function() {
    var skinType = parseInt(querySplit[2]);
    var spf = parseInt(querySplit[3]);
 
-   console.log('app.get(/v1/weather/uv: wuStr = ' +  wuStr);
-   console.log('app.get(/v1/weather/uv: skinType = ' +  skinType);
+   console.log('app.get(/v1/uv: wuStr = ' +  wuStr);
+   console.log('app.get(/v1/uv: skinType = ' +  skinType);
 
    wunder.conditions(wuStr, function(err, obj) {
     var parsedBody = JSON.parse(obj);
     if (err || parsedBody.current_observation == undefined) {
-      console.log('app.get(/v1/weather/uv: undefined');
+      console.log('app.get(/v1/uv: undefined');
       if (err) {
-        console.log('app.get(/v1/weather/uv: errors = ' + err);
+        console.log('app.get(/v1/uv: errors = ' + err);
       }
       response.send([
        { "attachment": {
@@ -319,13 +339,13 @@ app.listen(app.get('port'), function() {
        uvindex = 0;
      }
      var uvTime = getMaxUVTime (uvindex, skinType, spf);
-     console.log('app.get(/v1/weather/uv: uvTime = ' + uvTime);
+     console.log('app.get(/v1/uv: uvTime = ' + uvTime);
      var hours = Math.floor(uvTime/3600);
-     console.log('app.get(/v1/weather/uv: hours = ' + hours);
+     console.log('app.get(/v1/uv: hours = ' + hours);
      var minutes = Math.floor(uvTime/60-hours*60);
-     console.log('app.get(/v1/weather/uv: minutes = ' + minutes);
+     console.log('app.get(/v1/uv: minutes = ' + minutes);
      var seconds = uvTime-minutes*60-hours*3600;
-     console.log('app.get(/v1/weather/uv: seconds = ' + seconds);
+     console.log('app.get(/v1/uv: seconds = ' + seconds);
 
      response.send([
       { "attachment": {
@@ -355,10 +375,10 @@ app.listen(app.get('port'), function() {
 
 
 // vitamin d
- app.get('/v1/weather/vitamind', function(request, response) {
+ app.get('/v1/vitamind', function(request, response) {
    var query = URL.parse(request.url).query;
    var querySplit = query.split(",");
-   console.log('/v1/weather/vitamind:' +  query);
+   console.log('/v1/vitamind:' +  query);
 
    var wuStr = querySplit[0] + "," + querySplit[1];
    var skinType = parseInt(querySplit[2]);
@@ -383,15 +403,15 @@ app.listen(app.get('port'), function() {
    var age = 20;
    var height = 170;
    var weight = 73
-   console.log('app.get(/v1/weather/vitamind: wuStr = ' +  wuStr);
-   console.log('app.get(/v1/weather/vitamind: skinType = ' +  skinType);
+   console.log('app.get(/v1/vitamind: wuStr = ' +  wuStr);
+   console.log('app.get(/v1/vitamind: skinType = ' +  skinType);
 
    wunder.conditions(wuStr, function(err, obj) {
     var parsedBody = JSON.parse(obj);
     if (err || parsedBody.current_observation == undefined) {
-      console.log('app.get(/v1/weather/uv: undefined');
+      console.log('app.get(/v1/uv: undefined');
       if (err) {
-        console.log('app.get(/v1/weather/uv: errors = ' + err);
+        console.log('app.get(/v1/uv: errors = ' + err);
       }
       response.send([
        { "attachment": {
@@ -423,13 +443,13 @@ app.listen(app.get('port'), function() {
        uvindex = 0;
      }
      var vitTime = getVitaminDMaxTime(uvindex, spf, vitaminDTarget, age, height, weight, upper_clothing, lower_clothing);
-     console.log('app.get(/v1/weather/vitamind: vitTime = ' + vitTime);
+     console.log('app.get(/v1/vitamind: vitTime = ' + vitTime);
      var hours = Math.floor(vitTime/3600);
-     console.log('app.get(/v1/weather/vitamind: hours = ' + hours);
+     console.log('app.get(/v1/vitamind: hours = ' + hours);
      var minutes = Math.floor(vitTime/60-hours*60);
-     console.log('app.get(/v1/weather/vitamind: minutes = ' + minutes);
+     console.log('app.get(/v1/vitamind: minutes = ' + minutes);
      var seconds = vitTime-minutes*60-hours*3600;
-     console.log('app.get(/v1/weather/vitamind: seconds = ' + seconds);
+     console.log('app.get(/v1/vitamind: seconds = ' + seconds);
 
      response.send([
        {"text": "You need to be outside " + hours + "h" + minutes + "min" + seconds + "s to get " +vitaminDTarget + "IU of vitamin D"},
@@ -439,8 +459,8 @@ app.listen(app.get('port'), function() {
  });
 
 // Daily forecast
-app.get('/v1/weather/uvdaily', function(request, response) {
-     console.log('/v1/weather/uvdaily');
+app.get('/v1/uvdaily', function(request, response) {
+     console.log('/v1/uvdaily');
      var query = URL.parse(request.url).query;
      console.log('query: ' +  query);
      var querySplit = query.split(",");
@@ -524,8 +544,8 @@ app.get('/v1/weather/uvdaily', function(request, response) {
 });
 
 // Location
-app.get('/v1/weather/location', function(request, response) {
-     console.log('/v1/weather/location');
+app.get('/v1/location', function(request, response) {
+     console.log('/v1/location');
      var query = URL.parse(request.url).query;
      console.log('query: ' +  query);
      var querySplit = query.split(",");
@@ -603,8 +623,8 @@ app.get('/v1/weather/location', function(request, response) {
 });
 
 // Location
-app.get('/v1/weather/iflocation', function(request, response) {
-     console.log('/v1/weather/if');
+app.get('/v1/iflocation', function(request, response) {
+     console.log('/v1/if');
      var query = URL.parse(request.url).query;
      console.log('query: ' +  query);
      var querySplit = query.split(",");
