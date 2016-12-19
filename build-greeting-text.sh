@@ -1,0 +1,2 @@
+#!/bin/bash
+Curl -X POST -H "Content-Type: application/json" -d '{ "setting_type":"greeting", "greeting":{ "text":"Bonjour {{user_first_name}}, I can help you protect your skin from the sun and tell you how much vitamin D you are getting daily. I also know quite a lot about skin health." } }' "https://graph.facebook.com/v2.6/me/thread_settings?access_token=EAALIkfXrKegBAF26BPUii9lRFZAULswAytwEuSFqpvkb80MiDTJZAKuyweyNTZCc1d1MuKNBTEKa6O48URfPDoF4UyX1VV71j8glvTy8vL893MKfnBPDJJ7wl6CowVVC5Wc9D27kBShRowiHLIezIiSDTvR1JJSd3QEJ8HRcAZDZD"

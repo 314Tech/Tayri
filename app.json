@@ -1,0 +1,7 @@
+{
+  "name": "Node.js Getting Started",
+  "description": "A barebones Node.js app using Express 4",
+  "repository": "https://github.com/nabylb/violet-messenger-bot",
+  "logo": "http://bot.liveultrahealthy.com/images/VioletteBotBarCode.jpg",
+  "keywords": ["node", "express", "static"]
+}
